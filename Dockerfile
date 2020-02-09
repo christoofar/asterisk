@@ -4,7 +4,7 @@ ENV ASTERISK_VERSION 16.8.0
 
 WORKDIR /src
 
-COPY configs.tar.gz /src/configs.tar.gz
+COPY configs.tar.gz /root/configs.tar.gz
 COPY start.sh /root/start.sh
 
 RUN apt update && \
