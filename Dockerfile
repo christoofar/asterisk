@@ -134,7 +134,6 @@ RUN apt update && \
                            /usr/*/asterisk \
 && chmod -R 750 /var/spool/asterisk \
 && cd .. \
-&& [ "$(ls -A /etc/asterisk)" ] && echo "etc folder has files, not doing anything" || tar -xvzf configs.tar.gz -C /etc/asterisk \
 && rm * -R
 
 EXPOSE 5060/udp
