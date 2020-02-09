@@ -4,10 +4,12 @@ ENV ASTERISK_VERSION 16.8.0
 
 WORKDIR /src
 
+COPY configs.tar.gz /src/configs.tar.gz
+COPY start.sh /root/start.sh
+
 RUN apt update && \
-    apt install -y git curl wget libnewt-dev libssl-dev libncurses5-dev libsqlite3-dev build-essential \
-    libjansson-dev libxml2-dev uuid-dev libedit-dev mpg123 ffmpeg subversion \
-  && export GNUPGHOME="$(mktemp -d)" \
+    apt install -y git curl wget libnewt-dev libssl-dev libncurses5-dev libsqlite3-dev build-essential libjansson-dev libxml2-dev uuid-dev libedit-dev mpg123 ffmpeg subversion \
+    && export GNUPGHOME="$(mktemp -d)" \
   && for key in \
     551F29104B2106080C6C2851073B0C1FC9B2E352 \
     21A91EB1F012252993E9BF4A368AB332B59975F3 \
@@ -40,7 +42,7 @@ RUN apt update && \
     --disable app_skel \
     --disable app_fax \
     --disable app_ivrdemo \
-     --disable app_saycounted \
+    --disable app_saycounted \
     --disable app_statsd \
 # Bridges
     --enable-category MENUSELECT_BRIDGES \
@@ -107,7 +109,6 @@ RUN apt update && \
     --disable-category MENUSELECT_EXTRA_SOUNDS \
     --enable EXTRA-SOUNDS-EN-ULAW \
     menuselect.makeopts \
-
 && make -j $(nproc) \
 && sh contrib/scripts/get_mp3_source.sh \
 && make install \
@@ -124,7 +125,7 @@ RUN apt update && \
   perl-modules \
   pkg-config \
   xz-utils \
-   ${devpackages} \
+  ${devpackages} \
 && rm -rf /var/lib/apt/lists/* \
 && mkdir -p /etc/asterisk/ \
          /var/spool/asterisk/fax \
@@ -133,6 +134,10 @@ RUN apt update && \
                            /usr/*/asterisk \
 && chmod -R 750 /var/spool/asterisk \
 && cd .. \
-&& rm -R *
+&& [ "$(ls -A /etc/asterisk)" ] && echo "etc folder has files, not doing anything" || tar -xvzf configs.tar.gz -C /etc/asterisk \
+&& rm * -R
 
-ENTRYPOINT [ "/usr/sbin/asterisk -rvvvvvvvv && /usr/sbin/asterisk -rvvvvv" ]
+EXPOSE 5060/udp
+VOLUME /var/lib/asterisk /etc/asterisk
+
+ENTRYPOINT [ "/root/start.sh" ]
