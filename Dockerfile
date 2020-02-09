@@ -99,13 +99,13 @@ RUN apt update && \
     --disable-category MENUSELECT_AGIS \
 # Core sounds
     --disable-category MENUSELECT_CORE_SOUNDS \
-    --enable CORE-SOUNDS-EN-WAV \
+    --enable CORE-SOUNDS-EN-ULAW \
 # MOH
     --disable-category MENUSELECT_MOH \
-    --enable MOH-OPSOUND-WAV \
+    --enable MOH-OPSOUND-ULAW \
 # Extra Sounds
     --disable-category MENUSELECT_EXTRA_SOUNDS \
-    --enable EXTRA-SOUNDS-EN-WAV \
+    --enable EXTRA-SOUNDS-EN-ULAW \
     menuselect.makeopts \
 
 && make -j $(nproc) \
@@ -135,4 +135,4 @@ RUN apt update && \
 && cd .. \
 && rm -R *
 
-ENTRYPOINT [ "asterisk -rvvvvvvvv" ]
+ENTRYPOINT [ "/usr/sbin/asterisk -rvvvvvvvv" ]
