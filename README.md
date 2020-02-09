@@ -18,9 +18,9 @@ Mount ``/etc/asterisk`` inside the container to point to a folder on your host. 
 
 No.  There's probably a few FreePBX docker images out there with a companion Asterisk instance available; but FreePBX is actually a hinderance to advanced telephony developers.   Maybe it might sense to make a new Docker image based on this one with FreePBX on it.
 
-# Running in Docker
+# Running in Docker (no need to build this image)
 
-A barebones server can be started this way:
+A barebones server can be started this way by grabbing the latest image straight from Docker Hub:
 
 ``docker run -p 5060:5060/udp -p 4569:4569/udp --name asterisk christoofar/asterisk``
 
@@ -29,6 +29,12 @@ You probably also want to setup your Asterisk instance rather than using the bas
 ``docker run -p 5060:5060/udp -p 4569:4569/udp -v ~/asteriskconfig:/etc/asterisk --name asterisk christoofar/asterisk``
 
 Obviously if you're going to base your own config, it makes sense to setup your own Docker image and then add a COPY step in your Dockerfile to port in whatever config files you need into ``/etc/asterisk`` and sound files and certificates into ``/var/lib/asterisk/*``
+
+# RTP ports and Docker
+
+Docker cannot deal with a wide range of UDP ports being forwarded.  One way to get around this is to run the container on a machine that is not using 10000-20000 UDP and start the container with ``--network=host``.
+
+You will need to talk to your admins about it since this gives the container full access to the host network and is considered insecure; even though this Docker image only has one running service beyond the ``debian-lite`` base image, Asterisk.
 
 # Building the Service
 
