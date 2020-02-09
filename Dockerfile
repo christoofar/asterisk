@@ -10,18 +10,6 @@ COPY start.sh /root/start.sh
 RUN apt update && \
     apt install -y git curl wget libnewt-dev libssl-dev libncurses5-dev libsqlite3-dev build-essential libjansson-dev libxml2-dev uuid-dev libedit-dev mpg123 ffmpeg subversion uuid-runtime \
     && export GNUPGHOME="$(mktemp -d)" \
-  && for key in \
-    551F29104B2106080C6C2851073B0C1FC9B2E352 \
-    21A91EB1F012252993E9BF4A368AB332B59975F3 \
-    80CEBC345EC9FF529B4B7B808438CBA18D0CAA72 \
-    639D932D5170532F8C200CCD9C59F000777DCC45 \
-    57E769BC37906C091E7F641F6CB44E557BD982D8 \
-    CDBEE4CC699E200EB4D46BB79E76E3A42341CE04 \
-  ; do \
-    gpg --keyserver pgp.mit.edu --recv-keys "$key" || \
-    gpg --keyserver keyserver.pgp.com --recv-keys "$key" || \
-    gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" ; \
-  done \
   && wget https://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-${ASTERISK_VERSION}.tar.gz \
   && tar xzf asterisk-${ASTERISK_VERSION}.tar.gz \
   && cd asterisk-${ASTERISK_VERSION} \
