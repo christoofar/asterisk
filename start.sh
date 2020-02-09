@@ -1,8 +1,10 @@
 #!/bin/bash
 IAXPASSWORD=$(uuidgen)
+IPADDRESS=$(hostname --ip-address)
 [ "$(ls -A /etc/asterisk)" ] && echo "etc folder has files, not doing anything" || {
 	tar -xvzf /root/configs.tar.gz -C /etc/asterisk;
 	sed -i "s/changme/$IAXPASSWORD/g" /etc/asterisk/iax.conf
+	sed -i "s/MYIPADDRESS/$IPADDRESS/g" /etc/asterisk/iax.conf
 	echo;
 	echo Asterisk setup with a default configuration;
 	echo To help you with connectivity tests we have set up the following;
