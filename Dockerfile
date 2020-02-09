@@ -135,5 +135,4 @@ RUN apt update && \
 && cd .. \
 && rm -R *
 
-
 ENTRYPOINT [ "asterisk -rvvvvvvvv" ]
