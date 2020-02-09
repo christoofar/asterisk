@@ -135,4 +135,4 @@ RUN apt update && \
 && cd .. \
 && rm -R *
 
-ENTRYPOINT [ "/usr/sbin/asterisk -rvvvvvvvv" ]
+ENTRYPOINT [ "/usr/sbin/asterisk -rvvvvvvvv && /usr/sbin/asterisk -rvvvvv" ]
