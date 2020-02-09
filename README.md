@@ -2,6 +2,8 @@
 
 This is a working STABLE and usable Asterisk PBX Server, in Docker, using Debian-lite.
 
+We can't use Alpine due to changes in Asterisk since 14 that make it unhappy with the glibc that's in that distro.  So instead we use debian-slim, compile from scratch, then wipe off (most) unnecessary kits.   The full image is less than 200MB, which isn't really a burden on the smallest of cloud instances.
+
 As of right now the LTS is 16.8.0.
 
 Standard codecs and options are setup and installed on this image.   It's highly recommended you provide your own ``/etc/asterisk`` folder as a mount to a running container.  If you don't provide one, you're going to get a standard configuration that has no SIP extensions configured, but it does have a pre-configured PBX trunk set up that can dial USA/Canada toll-free numbers.
@@ -26,9 +28,11 @@ A barebones server can be started this way:
 
 If you prefer to build your own image locally and run it:
 
-``
-git clone github.com/christoofar/asterisk/
+```
+git clone https://github.com/christoofar/asterisk/
 cd asterisk
 docker build -t asterisk .
 docker run --name asterisk asterisk
-``
+```
+
+Mount ``/etc/asterisk`` inside the container to point to a folder on your host.   You can use the sample configuration files here in this repo as a starting template or roll your own.  Most people start by editing ``sip.conf`` and creating a SIP extension and then connecting a SIP client like XLite to the server instance.   From there they start writing dialplan programs in ``extensions.conf``, and so on.
