@@ -22,7 +22,13 @@ No.  There's probably a few FreePBX docker images out there with a companion Ast
 
 A barebones server can be started this way:
 
-``docker run --name asterisk christoofar/asterisk``
+``docker run -p 5060:5060/udp -p 4569:4569/udp --name asterisk christoofar/asterisk``
+
+You probably also want to setup your Asterisk instance rather than using the basic config that's inside the container.   For that, create a local mount from ``~\asteriskconfig`` (or wherever you want) to the ``/etc/asterisk`` volume like this:
+
+``docker run -p 5060:5060/udp -p 4569:4569/udp -v ~/asteriskconfig:/etc/asterisk --name asterisk christoofar/asterisk``
+
+Obviously if you're going to base your own config, it makes sense to setup your own Docker image and then add a COPY step in your Dockerfile to port in whatever config files you need into ``/etc/asterisk`` and sound files and certificates into ``/var/lib/asterisk/*``
 
 # Building the Service
 
