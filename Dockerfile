@@ -8,7 +8,7 @@ COPY configs.tar.gz /root/configs.tar.gz
 COPY start.sh /root/start.sh
 
 RUN apt update && \
-    apt install -y git curl wget libnewt-dev libssl-dev libncurses5-dev libsqlite3-dev build-essential libjansson-dev libxml2-dev uuid-dev libedit-dev mpg123 ffmpeg subversion \
+    apt install -y git curl wget libnewt-dev libssl-dev libncurses5-dev libsqlite3-dev build-essential libjansson-dev libxml2-dev uuid-dev libedit-dev mpg123 ffmpeg subversion uuid-runtime \
     && export GNUPGHOME="$(mktemp -d)" \
   && for key in \
     551F29104B2106080C6C2851073B0C1FC9B2E352 \
@@ -116,6 +116,8 @@ RUN apt update && \
 && DEBIAN_FRONTEND=noninteractive apt-get --yes purge --auto-remove \
   autoconf \
   build-essential \
+  git \
+  subversion \
   bzip2 \
   cpp \
   m4 \
@@ -136,7 +138,7 @@ RUN apt update && \
 && cd .. \
 && rm * -R
 
-EXPOSE 5060/udp
+EXPOSE 5060/udp 4569/tcp 4569/udp
 VOLUME /var/lib/asterisk /etc/asterisk
 
 ENTRYPOINT [ "/root/start.sh" ]
