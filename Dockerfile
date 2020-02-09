@@ -138,7 +138,7 @@ RUN apt update && \
 && cd .. \
 && rm * -R
 
-EXPOSE 5060/udp 4569/tcp 4569/udp
+EXPOSE 5060/udp 4569/udp
 VOLUME /var/lib/asterisk /etc/asterisk
 
 ENTRYPOINT [ "/root/start.sh" ]
