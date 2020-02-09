@@ -10,6 +10,12 @@ Standard codecs and options are setup and installed on this image.   It's highly
 
 Also consider mounting ``/var/lib/asterisk/sounds`` if you are going to be adding to the default EN-US sound packs that are installed, and also a mount point for SSL certificates if you plan on configuring TCP/TLS, ARI, and other services that use encrypted sockets.
 
+# What can I do with this image?
+
+We have base SIP and IAX configured and turned on.  There is also a default outbound trunk setup to place calls to USA/CAN toll-free numbers, so if you successfully attach a VOIP client to this instance you should be able to place outbound telephone calls over the PSTN network with minimal fuss.
+
+When you start this container interactively you will be given the IAX2 login credentials so you can use 
+
 # How do I configure this thing?
 
 Mount ``/etc/asterisk`` inside the container to point to a folder on your host.   You can use the sample configuration files here in this repo as a starting template or roll your own.  Most people start by editing ``sip.conf`` and creating a SIP extension and then connecting a SIP client like XLite to the server instance.   From there they start writing dialplan programs in ``extensions.conf``, and so on.

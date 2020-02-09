@@ -8,8 +8,11 @@ IAXPASSWORD=$(uuidgen)
 	echo To help you with connectivity tests we have set up the following;
 	echo inbound config: ;
 	echo -------------------------;
+	echo Protocol: IAX2;
+	echo 
 	echo Extension: 1234;
 	echo Password:  $IAXPASSWORD;
+	echo Port: 4569;
 	echo -------------------------;
 	echo Asterisk is running on $(hostname --ip-address);
 	echo Hostname: $(hostname);
