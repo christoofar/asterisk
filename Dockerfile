@@ -5,9 +5,9 @@ ENV ASTERISK_VERSION 16.8.0
 WORKDIR /src
 
 RUN apt update && \
-    apt install -y git curl wget libnewt-dev libssl-dev libncurses5-dev libsqlite3-dev build-essential libjansson-dev libxml2-dev uuid-dev libedit-dev mpg1
-23 ffmpeg subversion \
-    && export GNUPGHOME="$(mktemp -d)" \
+    apt install -y git curl wget libnewt-dev libssl-dev libncurses5-dev libsqlite3-dev build-essential \
+    libjansson-dev libxml2-dev uuid-dev libedit-dev mpg123 ffmpeg subversion \
+  && export GNUPGHOME="$(mktemp -d)" \
   && for key in \
     551F29104B2106080C6C2851073B0C1FC9B2E352 \
     21A91EB1F012252993E9BF4A368AB332B59975F3 \
