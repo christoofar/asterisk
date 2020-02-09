@@ -7,8 +7,6 @@ WORKDIR /src
 COPY configs.tar.gz /src/configs.tar.gz
 COPY start.sh /root/start.sh
 
-VOLUME /etc/asterisk /var/lib/asterisk
-
 RUN apt update && \
     apt install -y git curl wget libnewt-dev libssl-dev libncurses5-dev libsqlite3-dev build-essential libjansson-dev libxml2-dev uuid-dev libedit-dev mpg123 ffmpeg subversion \
     && export GNUPGHOME="$(mktemp -d)" \
