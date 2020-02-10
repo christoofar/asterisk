@@ -88,7 +88,7 @@ If you prefer to build your own image locally and run it:
 git clone https://github.com/christoofar/asterisk/
 cd asterisk
 docker build -t asterisk .
-docker run --name asterisk asterisk
+docker run -p 5060:5060/udp -p 4569:4569/udp -v ~/asteriskconfig:/etc/asterisk --name asterisk asterisk
 ```
 
 Mount ``/etc/asterisk`` inside the container to point to a folder on your host.   You can use the sample configuration files here in this repo as a starting template or roll your own.  Most people start by editing ``sip.conf`` and creating a SIP extension and then connecting a SIP client like XLite to the server instance.   From there they start writing dialplan programs in ``extensions.conf``, and so on.
