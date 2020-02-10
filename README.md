@@ -40,19 +40,19 @@ Obviously if you're going to base your own config, it makes sense to setup your 
 
 If you started Docker without the ``-d`` option, the first time the container runs you will see this:
 
-![console output](https://github.com/christoofar/asterisk/images/startup.png)
+![console output](https://github.com/christoofar/asterisk/blob/master/images/startup.png?raw=true)
 
 Using Zoiper you can connect starting with entering your username as ``TESTUSER`` and use the password that is showing up in the container console when you first started up the container:
 
-![enter credentials into zoiper](https://github.com/christoofar/asterisk/images/zoiper1.png)
+![enter credentials into zoiper](https://github.com/christoofar/asterisk/blob/master/images/zoiper1.png?raw=true)
 
 Next, provide the public-facing IP address of the host.  In our case, we set this Docker image up on a Raspberry PI and that is its IP address.
 
-![enter IP address of container host](https://github.com/christoofar/asterisk/images/zoiper2.png)
+![enter IP address of container host](https://github.com/christoofar/asterisk/blob/master/images/zoiper2.png?raw=true)
 
 Zoiper will then attempt to connect to Asterisk.  The test extension is configured as an IAX2 extension and is listening on UDP port 4569.
 
-![test connection](https://github.com/christoofar/asterisk/images/zoiper3.png)
+![test connection](https://github.com/christoofar/asterisk/blob/master/images/zoiper3.png?raw=true)
 
 Finally, you can test placing a toll-free call to ``1 (800) 444-4444`` which is a free test number.   The trunk that comes with the test configuration is capable of dialing any USA or Canadian toll-free number.
 
