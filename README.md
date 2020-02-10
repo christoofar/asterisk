@@ -12,9 +12,11 @@ Also consider mounting ``/var/lib/asterisk/sounds`` if you are going to be addin
 
 # What can I do with this image?
 
-We have base SIP and IAX configured and turned on.  There is also a default outbound trunk setup to place calls to USA/CAN toll-free numbers, so if you successfully attach a VOIP client to this instance you should be able to place outbound telephone calls over the PSTN network with minimal fuss.
+The base SIP and IAX channel drivers are configured and turned on.  There is also a default outbound trunk setup to place calls to USA/CAN toll-free numbers; so if you successfully attach a VOIP client to this instance you should be able to place outbound telephone calls over the PSTN network with minimal fuss.
 
-When you start this container interactively you will be given the IAX2 login credentials so you can use 
+When you start this container interactively you will be given a login/password to a default IAX2 extension that you can use Zoiper or another IAX client to connect and place calls to the PSTN.
+
+This Docker image is also available for ARM64,ARMv6,ARMv7 so you can quickly load a working Asterisk instance to any number of edge-type devices, including the Raspberry PI.
 
 # How do I configure this thing?
 
@@ -36,6 +38,19 @@ You probably also want to setup your Asterisk instance rather than using the bas
 
 Obviously if you're going to base your own config, it makes sense to setup your own Docker image and then add a COPY step in your Dockerfile to port in whatever config files you need into ``/etc/asterisk`` and sound files and certificates into ``/var/lib/asterisk/*``
 
+# Connecting to Asterisk CLI
+
+```
+docker exec -it asterisk /bin/bash
+asterisk -rvvvvv
+```
+
+# Asterisk configs
+
+Two mounts are available at ``/etc/asterisk`` and ``/var/lib/asterisk`` inside the machine.  Once you start the container you can mount these volumes somewhere on your host to edit the asterisk configs.
+
+You can have the configurations take effect with ``docker stop`` and ``docker start``, or you can issue ``core restart now`` inside the Asterisk CLI.
+
 # Testing Asterisk
 
 If you started Docker without the ``-d`` option, the first time the container runs you will see this:
@@ -55,6 +70,9 @@ Zoiper will then attempt to connect to Asterisk.  The test extension is configur
 ![test connection](https://github.com/christoofar/asterisk/blob/master/images/zoiper3.png?raw=true)
 
 Finally, you can test placing a toll-free call to ``1 (800) 444-4444`` which is a free test number.   The trunk that comes with the test configuration is capable of dialing any USA or Canadian toll-free number.
+
+![dialing out](https://github.com/christoofar/asterisk/blob/master/images/zoiper3.png?raw=true)
+
 
 # RTP ports and Docker
 

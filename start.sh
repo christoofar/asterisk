@@ -17,12 +17,12 @@ IPADDRESS=$(hostname --ip-address)
 	echo Password:  $SIPPASSWORD;
 	echo Port: 4569 udp;
 	echo -------------------------;
-	echo Asterisk is running on $(hostname --ip-address);
-	echo Hostname: $(hostname);
+	echo Asterisk is running on internal IP $(hostname --ip-address);
+	echo Docker Hostname: $(hostname);
 	echo -------------------------;
 	echo To work on Asterisk config on your host, there are two mounts: ;
 	echo /etc/asterisk and /var/lib/asterisk;
 	echo;
 }
 cd /root
-/usr/sbin/asterisk -f
+/usr/sbin/asterisk -cvvvvv
