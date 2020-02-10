@@ -71,7 +71,7 @@ Zoiper will then attempt to connect to Asterisk.  The test extension is configur
 
 Finally, you can test placing a toll-free call to ``1 (800) 444-4444`` which is a free test number.   The trunk that comes with the test configuration is capable of dialing any USA or Canadian toll-free number.
 
-![dialing out](https://github.com/christoofar/asterisk/blob/master/images/zoiper3.png?raw=true)
+![dialing out](https://github.com/christoofar/asterisk/blob/master/images/zoiper4.png?raw=true)
 
 
 # RTP ports and Docker
