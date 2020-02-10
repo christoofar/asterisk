@@ -26,7 +26,7 @@ No.  There's probably a few FreePBX docker images out there with a companion Ast
 
 # Running in Docker (no need to build this image)
 
-A barebones server can be started this way by grabbing the latest image straight from Docker Hub:
+A barebones server can be started this way by grabbing the latest image straight from Docker Hub (the first time you run this, do not use the -d option):
 
 ``docker run -p 5060:5060/udp -p 4569:4569/udp --name asterisk christoofar/asterisk``
 
@@ -35,6 +35,26 @@ You probably also want to setup your Asterisk instance rather than using the bas
 ``docker run -p 5060:5060/udp -p 4569:4569/udp -v ~/asteriskconfig:/etc/asterisk --name asterisk christoofar/asterisk``
 
 Obviously if you're going to base your own config, it makes sense to setup your own Docker image and then add a COPY step in your Dockerfile to port in whatever config files you need into ``/etc/asterisk`` and sound files and certificates into ``/var/lib/asterisk/*``
+
+# Testing Asterisk
+
+If you started Docker without the ``-d`` option, the first time the container runs you will see this:
+
+![console output](https://github.com/christoofar/asterisk/images/startup.png)
+
+Using Zoiper you can connect starting with entering your username as ``TESTUSER`` and use the password that is showing up in the container console when you first started up the container:
+
+![enter credentials into zoiper](https://github.com/christoofar/asterisk/images/zoiper1.png)
+
+Next, provide the public-facing IP address of the host.  In our case, we set this Docker image up on a Raspberry PI and that is its IP address.
+
+![enter IP address of container host](https://github.com/christoofar/asterisk/images/zoiper2.png)
+
+Zoiper will then attempt to connect to Asterisk.  The test extension is configured as an IAX2 extension and is listening on UDP port 4569.
+
+![test connection](https://github.com/christoofar/asterisk/images/zoiper3.png)
+
+Finally, you can test placing a toll-free call to ``1 (800) 444-4444`` which is a free test number.   The trunk that comes with the test configuration is capable of dialing any USA or Canadian toll-free number.
 
 # RTP ports and Docker
 

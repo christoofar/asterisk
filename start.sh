@@ -13,7 +13,7 @@ IPADDRESS=$(hostname --ip-address)
 	echo -------------------------;
 	echo Protocol: IAX;
 	echo 
-	echo Extension: TEST123;
+	echo Extension: TESTUSER;
 	echo Password:  $SIPPASSWORD;
 	echo Port: 4569 udp;
 	echo -------------------------;
