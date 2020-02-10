@@ -53,7 +53,7 @@ You can have the configurations take effect with ``docker stop`` and ``docker st
 
 # Testing Asterisk
 
-If you started Docker without the ``-d`` option, the first time the container runs you will see this:
+If you start Asterisk with the ``-d`` option to run it in the background, you can get the password to the test IAX extension with ``docker exec`` and then looking at the contents of ``/etc/asterisk/iax.conf``.   If you have the asterisk configuration folder mounted, you can look for the iax.conf file there.
 
 ![console output](https://github.com/christoofar/asterisk/blob/master/images/startup.png?raw=true)
 
