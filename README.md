@@ -44,6 +44,11 @@ Obviously if you're going to base your own config, it makes sense to setup your 
 docker exec -it asterisk /bin/bash
 asterisk -rvvvvv
 ```
+or
+
+```
+docker exec -it asterisk asterisk -rvvvvv
+```
 
 # Asterisk configs
 
