@@ -5,6 +5,7 @@ IPADDRESS=$(hostname --ip-address)
 	tar -xvzf /root/configs.tar.gz -C /etc/asterisk;
 	sed -i "s/changme/$SIPPASSWORD/g" /etc/asterisk/sip.conf;
 	sed -i "s/IPADDRESS/$IPADDRESS/g" /etc/asterisk/sip.conf;
+	sed -i "s/IPADDRESS/$IPADDRESS/g" /etc/asterisk/iax.conf;
 	sed -i "s/TEST123/$SIPPASSWORD/g" /etc/asterisk/iax.conf;
 	echo;
 	echo Asterisk is setup with a default configuration;
