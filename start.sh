@@ -26,4 +26,4 @@ IPADDRESS=$(hostname --ip-address)
 	echo;
 }
 cd /root
-/usr/sbin/asterisk -cvvvvv
+/usr/sbin/asterisk -fvvv
